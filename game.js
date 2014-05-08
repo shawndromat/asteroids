@@ -42,6 +42,7 @@
       this.bullets[i].move(this.dimX, this.dimY);
     }
     this.ship.power(this.getAccel());
+    this.ship.points += this.getPoints();
     this.ship.move(this.dimX, this.dimY);
   }
 
@@ -87,12 +88,15 @@
   }
 
   Game.prototype.getAccel = function () {
-    var accel = [0,0];
-    if (key.isPressed('W')) { accel[1] -= .3; }
-    if (key.isPressed('A')) { accel[0] -= .3; }
-    if (key.isPressed('S')) { accel[1] += .3; }
-    if (key.isPressed('D')) { accel[0] += .3; }
-    return accel;
+    if (key.isPressed('W')) { return .3; }
+    if (key.isPressed('S')) { return -0.03; }
+    return 0;
+  }
+
+  Game.prototype.getPoints = function () {
+    if (key.isPressed('A')) { return -0.05; };
+    if (key.isPressed('D')) { return 0.05; };
+    return 0;
   }
 
   Game.prototype.fireBullet = function() {
